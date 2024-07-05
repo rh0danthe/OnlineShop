@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="onlineshop_admin">
+
+        <sql dbms="postgresql">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS customers (
+               id SERIAL PRIMARY KEY,
+               name TEXT NOT NULL
+            );
+            ]]>
+        </sql>
+
+        <sql dbms="postgresql">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS products (
+                id SERIAL PRIMARY KEY,
+                name TEXT NOT NULL,
+                category TEXT NOT NULL,
+                price DECIMAL NOT NULL
+            );
+            ]]>
+        </sql>
+
+        <sql dbms="postgresql">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS orders (
+                id SERIAL PRIMARY KEY,
+                customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
+                product_id INT REFERENCES products(id) ON DELETE CASCADE
+                );
+            ]]>
+        </sql>
+
+        <sql>
+            INSERT INTO customers (id, name)
+            VALUES (1, 'покупатель 1'),
+                   (2, 'покупатель 2'),
+                   (3, 'покупатель 3');
+        </sql>
+
+        <sql>
+            INSERT INTO products (id, name, category, price)
+            VALUES (1, 'товар 1', 'категория 1', 50.00),
+                   (2, 'товар 2', 'категория 1', 25.00),
+                   (3, 'товар 3', 'категория 2', 200.00),
+                   (4, 'товар 4', 'категория 3', 100.00);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

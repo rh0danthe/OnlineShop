@@ -12,6 +12,5 @@ public interface CustomerMapper {
 
     CustomerResponse customerToResponse(Customer customer);
 
-    @Mapping(target = "id", ignore = true)
     Customer requestToCustomer(CustomerRequest request);
 }

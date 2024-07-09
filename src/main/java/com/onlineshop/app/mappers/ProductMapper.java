@@ -11,6 +11,5 @@ public interface ProductMapper {
 
     ProductResponse productToResponse(Product product);
 
-    @Mapping(target = "id", ignore = true)
     Product requestToProduct(ProductRequest request);
 }

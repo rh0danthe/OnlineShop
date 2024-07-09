@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="core-data-1" author="rhodanthe">
+        <sql>
+            INSERT INTO customer (name)
+            VALUES ('покупатель 1'),
+                   ('покупатель 2'),
+                   ('покупатель 3');
+        </sql>
+    </changeSet>
+
+    <changeSet id="core-data-2" author="rhodanthe">
+        <sql>
+            INSERT INTO product (name, category, price)
+            VALUES ('товар 1', 'категория 1', 50.00),
+                   ('товар 2', 'категория 1', 25.00),
+                   ('товар 3', 'категория 2', 200.00),
+                   ('товар 4', 'категория 3', 100.00);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

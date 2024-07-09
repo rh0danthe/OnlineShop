@@ -29,10 +29,10 @@ public class OrderController {
     }
 
     @PostMapping
-    @ApiOperation(value = "Place a new order", notes = "Create a new order with the provided request data.")
+    @ApiOperation(value = "Create Order", notes = "Create an order using the provided order data")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Order placed successfully", response = OrderResponse.class),
-            @ApiResponse(code = 400, message = "Invalid input data"),
+            @ApiResponse(code = 200, message = "Order created successfully", response = OrderResponse.class),
+            @ApiResponse(code = 400, message = "Bad request"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
     public ResponseEntity<OrderResponse> create(@Valid @RequestBody OrderRequest request){
@@ -41,6 +41,11 @@ public class OrderController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Export Order Statistics", notes = "Export order statistics as CSV")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Statistics exported successfully", response = OrderResponse.class),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     public void exportCSV(HttpServletResponse response) throws IOException {
         exportService.exportOrdersToCsv(response);
     }

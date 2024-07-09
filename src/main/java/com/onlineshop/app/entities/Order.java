@@ -1,16 +1,22 @@
 package com.onlineshop.app.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = "\"order\"")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +24,8 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @NotNull(message = "В заказе должен быть покупатель")
+    @Valid
     private Customer customer;
 
     @ManyToMany
@@ -26,6 +34,8 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @NotEmpty(message = "Список товаров не может быть пустым")
+    @Valid
     private List<Product> products = new ArrayList<>();
 
     public Order(Customer customer, List<Product> products){

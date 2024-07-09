@@ -20,7 +20,7 @@ public class OrderScheduler {
         this.orderService = orderService;
     }
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 300000)
     public void generateRandomOrder() throws IOException {
         try {
         Random random = new Random();

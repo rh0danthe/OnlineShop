@@ -1,6 +1,6 @@
-package com.onlineshop.app.middleware;
+package com.onlineshop.app.exceptionUtils;
 
-import com.onlineshop.app.models.ErrorMessage;
+import com.onlineshop.app.exceptionUtils.models.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;

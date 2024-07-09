@@ -2,12 +2,10 @@ package com.onlineshop.app.services.impl;
 
 import com.onlineshop.app.dto.order.OrderRequest;
 import com.onlineshop.app.dto.order.OrderResponse;
-import com.onlineshop.app.dto.product.DbProductResponse;
 import com.onlineshop.app.entities.Customer;
 import com.onlineshop.app.entities.Order;
 import com.onlineshop.app.entities.Product;
 import com.onlineshop.app.exceptionUtils.exceptions.order.OrderBadRequest;
-import com.onlineshop.app.exceptionUtils.exceptions.product.ProductNotFound;
 import com.onlineshop.app.mappers.OrderMapper;
 import com.onlineshop.app.repository.CustomerRepository;
 import com.onlineshop.app.repository.OrderRepository;
@@ -18,12 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {

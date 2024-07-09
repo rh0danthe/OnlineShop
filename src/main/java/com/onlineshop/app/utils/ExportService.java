@@ -1,4 +1,4 @@
-package com.onlineshop.app.helpers;
+package com.onlineshop.app.utils;
 
 import com.onlineshop.app.entities.Order;
 import com.opencsv.CSVWriter;

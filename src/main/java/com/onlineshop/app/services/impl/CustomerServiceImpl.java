@@ -1,7 +1,7 @@
 package com.onlineshop.app.services.impl;
 
 import com.onlineshop.app.dto.customer.CustomerRequest;
-import com.onlineshop.app.dto.customer.DbCustomerResponse;
+import com.onlineshop.app.dto.customer.CustomerResponse;
 import com.onlineshop.app.entities.Customer;
 import com.onlineshop.app.exceptionUtils.exceptions.customer.CustomerNotFound;
 import com.onlineshop.app.mappers.CustomerMapper;
@@ -26,31 +26,31 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public DbCustomerResponse createCustomer(CustomerRequest request) {
+    public CustomerResponse createCustomer(CustomerRequest request) {
         Customer customer = mapper.requestToCustomer(request);
 
-        return mapper.customerToDbResponse(customerRepository.save(customer));
+        return mapper.customerToResponse(customerRepository.save(customer));
     }
 
     @Override
-    public DbCustomerResponse getCustomerById(int id) throws CustomerNotFound {
-        return mapper.customerToDbResponse(customerRepository.findById(id)
+    public CustomerResponse getCustomerById(int id) throws CustomerNotFound {
+        return mapper.customerToResponse(customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFound(String.format("Пользователя с айди %s не существует", id))));
     }
 
     @Override
-    public List<DbCustomerResponse> getAllCustomers() {
+    public List<CustomerResponse> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
         if (customers.isEmpty()) {
             throw new CustomerNotFound("Покупателей нет в базе данных");
         }
         return customers.stream()
-                .map(mapper::customerToDbResponse)
+                .map(mapper::customerToResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public DbCustomerResponse updateCustomer(int id, CustomerRequest request) {
+    public CustomerResponse updateCustomer(int id, CustomerRequest request) {
         Optional<Customer> dbCustomer = customerRepository.findById(id);
         if (dbCustomer.isEmpty()) {
             throw new CustomerNotFound(String.format("Пользователя с айди %s не существует", id));
@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = mapper.requestToCustomer(request);
         customer.setId(id);
         Customer updatedCustomer = customerRepository.save(customer);
-        return mapper.customerToDbResponse(updatedCustomer);
+        return mapper.customerToResponse(updatedCustomer);
     }
 
     @Override
